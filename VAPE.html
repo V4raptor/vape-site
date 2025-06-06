@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>VAPE - Site officiel</title>
+<style>
+  /* ===== Reset et base ===== */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body, html {
+    height: 100%;
+    background: #1f2125;
+    font-family: 'Poppins', sans-serif;
+    color: #ddd;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* ===== Fond animé points reliés ===== */
+  canvas#background {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    background: #1f2125;
+  }
+
+  /* ===== Header / Nav ===== */
+  header {
+    background: linear-gradient(90deg, #2c2f35, #25272c);
+    padding: 15px 0;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+  }
+  nav {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+  }
+  nav a {
+    flex: 1;
+    max-width: 140px;
+    text-align: center;
+    padding: 10px 0;
+    color: #ddd;
+    font-weight: 600;
+    text-decoration: none;
+    user-select: none;
+    border-radius: 6px;
+    transition: 
+      color 0.3s ease,
+      background-color 0.3s ease,
+      transform 0.3s ease;
+  }
+  nav a:hover,
+  nav a.active {
+    color: #ff5555;
+    background: rgba(255, 85, 85, 0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(255, 85, 85, 0.3);
+  }
+
+  /* ===== Main content ===== */
+  main {
+    flex-grow: 1;
+    max-width: 900px;
+    margin: 40px auto 60px;
+    background: rgba(40,40,45, 0.7);
+    border-radius: 15px;
+    padding: 30px 40px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+    color: #eee;
+  }
+
+  /* ===== Sections ===== */
+  section {
+    display: none;
+    animation: fadeIn 0.6s ease forwards;
+  }
+  section.active {
+    display: block;
+  }
+
+  /* Animation fadeIn */
+  @keyframes fadeIn {
+    from {opacity: 0; transform: translateY(15px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+
+  /* ===== Titres ===== */
+  h1 {
+    font-weight: 800;
+    color: #ff5a5a;
+    margin-bottom: 10px;
+    font-size: 2.8rem;
+    letter-spacing: 1.2px;
+  }
+  h2 {
+    margin-bottom: 15px;
+    color: #ff6e6e;
+  }
+  p {
+    line-height: 1.5;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    color: #ccc;
+  }
+
+  /* ===== Boutons ===== */
+  .btn {
+    display: inline-block;
+    background: linear-gradient(45deg, #ff5656, #ff2222);
+    color: #fff;
+    font-weight: 700;
+    padding: 12px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(255, 34, 34, 0.5);
+    transition: all 0.3s ease;
+    user-select: none;
+  }
+  .btn:hover {
+    background: linear-gradient(45deg, #ff2222, #ff5656);
+    box-shadow: 0 8px 20px rgba(255, 34, 34, 0.7);
+    transform: translateY(-4px);
+  }
+
+  /* ===== Téléchargement compteur ===== */
+  #downloadCount {
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: #ff4444;
+    text-align: center;
+    margin-top: 15px;
+    letter-spacing: 2px;
+  }
+
+  /* ===== Footer ===== */
+  footer {
+    background: #1f2125;
+    color: #aa2222;
+    text-align: center;
+    padding: 15px 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    user-select: none;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.5);
+  }
+
+</style>
+</head>
+<body>
+
+<!-- Fond animé -->
+<canvas id="background"></canvas>
+
+<header>
+  <nav>
+    <a href="#home" class="active" data-tab="home">Accueil</a>
+    <a href="#about" data-tab="about">À propos</a>
+    <a href="#dashboard" data-tab="dashboard">Tableau de bord</a>
+    <a href="#download" data-tab="download">Téléchargement</a>
+  </nav>
+</header>
+
+<main>
+  <section id="home" class="active">
+    <h1>VAPE — l’essentiel, sans compromis.</h1>
+    <p>Bienvenue sur le site officiel de VAPE, votre outil venu d’un autre monde.<br>
+       Explorez nos fonctionnalités, téléchargez l’application et rejoignez la révolution numérique.</p>
+  </section>
+
+  <section id="about">
+    <h2>À propos de VAPE</h2>
+    <p>VAPE est une application puissante et intuitive conçue pour répondre à tous vos besoins numériques avec élégance et efficacité. 
+       Notre équipe est dédiée à fournir des outils de qualité, simples et performants.</p>
+    <p>Nous mettons un point d'honneur à allier design moderne et fonctionnalités avancées pour une expérience utilisateur optimale.</p>
+  </section>
+
+  <section id="dashboard">
+    <h2>Tableau de bord</h2>
+    <p>Nombre total de téléchargements :</p>
+    <div id="downloadCount">0</div>
+    <p>Statistiques en temps réel, mises à jour automatiques et analyses pour mieux vous servir.</p>
+  </section>
+
+  <section id="download">
+    <h2>Téléchargement</h2>
+    <p>Obtenez la dernière version de VAPE en cliquant sur le bouton ci-dessous.</p>
+    <a class="btn" href="https://www.mediafire.com/file/wv9cmo8kg2pz4ua/VAPE.rar/file" target="_blank" rel="noopener noreferrer" id="downloadBtn">Télécharger</a>
+  </section>
+</main>
+
+<footer>
+  &copy; 2025 VAPE. All rights reserved.
+</footer>
+
+<script>
+  // Gestion onglets
+  const navLinks = document.querySelectorAll('nav a');
+  const sections = document.querySelectorAll('main section');
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+
+      // Retirer active de tous
+      navLinks.forEach(a => a.classList.remove('active'));
+      sections.forEach(sec => sec.classList.remove('active'));
+
+      // Ajouter active à l'onglet cliqué et la section correspondante
+      link.classList.add('active');
+      const tab = link.getAttribute('data-tab');
+      document.getElementById(tab).classList.add('active');
+
+      // Scroll vers top du main (optionnel)
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  // Animation compteur téléchargements (simulateur)
+  const downloadCount = document.getElementById('downloadCount');
+  let count = 0;
+  const targetCount = 15893; // Exemple, tu peux changer ça
+
+  function animateCount() {
+    if (count < targetCount) {
+      count += Math.floor((targetCount - count) / 20) + 1;
+      if(count > targetCount) count = targetCount;
+      downloadCount.textContent = count.toLocaleString('fr-FR');
+      requestAnimationFrame(animateCount);
+    }
+  }
+  animateCount();
+
+  // Fond animé avec points rouges reliés
+  const canvas = document.getElementById('background');
+  const ctx = canvas.getContext('2d');
+  let width, height;
+  let points = [];
+  const POINTS_COUNT = 60;
+  const MAX_DIST = 120;
+
+  function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  class Point {
+    constructor(x,y) {
+      this.x = x;
+      this.y = y;
+      this.vx = (Math.random() - 0.5) * 0.4;
+      this.vy = (Math.random() - 0.5) * 0.4;
+    }
+    move() {
+      this.x += this.vx;
+      this.y += this.vy;
+      if(this.x < 0 || this.x > width) this.vx *= -1;
+      if(this.y < 0 || this.y > height) this.vy *= -1;
+    }
+  }
+
+  for(let i=0; i<POINTS_COUNT; i++) {
+    points.push(new Point(Math.random()*width, Math.random()*height));
+  }
+
+  function draw() {
+    ctx.clearRect(0,0,width,height);
+    // Dessiner points
+    points.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 2.3, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(255, 80, 80, 0.8)';
+      ctx.fill();
+    });
+    // Dessiner lignes entre points proches
+    for(let i=0; i<POINTS_COUNT; i++) {
+      for(let j=i+1; j<POINTS_COUNT; j++) {
+        const dx = points[i].x - points[j].x;
+        const dy = points[i].y - points[j].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if(dist < MAX_DIST) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(255, 80, 80, ${(MAX_DIST - dist) / MAX_DIST * 0.4})`;
+          ctx.lineWidth = 1;
+          ctx.moveTo(points[i].x, points[i].y);
+          ctx.lineTo(points[j].x, points[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+    points.forEach(p => p.move());
+    requestAnimationFrame(draw);
+  }
+  draw();
+
+</script>
+
+</body>
+</html>
